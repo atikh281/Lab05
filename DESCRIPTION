@@ -1,0 +1,12 @@
+Package: Team05Lab05
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2019-10-04
+Authors@R: c(person("Jose", "Mendez", role = c("aut", "cre"), email = "josme478@student.liu.se"),
+    person("Sara", "Salahshour", role = "aut", email = "sarsa293@student.liu.se"),
+    person("Atieh", "Khaleghi", role = "aut", email = "atikh281@student.liu.se"))
+Description: Answer for Lab05
+License: GPL-2
+Encoding: UTF-8
+
