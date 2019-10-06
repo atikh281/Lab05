@@ -38,18 +38,12 @@ check_fuel_region <- function(region = "Scotland"){
   return(energy_fuel)
 }
 
-plot_fuels_region <- function(region = "Scotland"){
-  df <- check_fuel_region(region)
-  ggplot2::ggplot(data = df, ggplot2::aes(x = fuel, y = perc)) +
-    ggplot2::geom_point(ggplot2::aes(size = perc, col = fuel, alpha = perc))
-}
-
 pie_API <- function(region){
   df <- check_fuel_region(region)
     ggplot2::ggplot(data = df , ggplot2::aes(x ="" , y = perc , fill = fuel))+
     ggplot2::geom_bar(stat = "identity", color = "white")+ 
     ggplot2::coord_polar(theta = "y", start = 0)+
-    ggplot2::geom_text(aes(label = perc), position = position_stack(vjust = 0.55), size = 4 , check_overlap = TRUE)+
+    ggplot2::geom_text(ggplot2::aes(label = perc), position = ggplot2::position_stack(vjust = 0.55), size = 4 , check_overlap = TRUE)+
     ggplot2::scale_fill_brewer(palette="Set1")+
     ggplot2::theme_void()
   
