@@ -3,15 +3,26 @@ library("jsonlite")
 library("dplyr")
 library("ggplot2")
 library("lubridate")
-library("proto")
-library("scales")
 
+#' @title A function to know the regions admitted by check_fuel_region_time().
+#' @return  A data frame with two columns, regionid and shortname. 
+#' @export regions
 regions <- function(){ 
   url <- "https://api.carbonintensity.org.uk/regional/"
   regions_are <- jsonlite::fromJSON(url)
   regions_are <- regions_are[["data"]][["regions"]][[1]][c(1,3)]
   return(regions_are)
 }
+
+#' @title Get the electricity sources used between specified datetimes for a specified region.
+#' @param region A number (regionid) or a string (region short name). If nothing specified, the default is "Scotland". See \code{regions()} to know the admitted values.
+#' @param from A string with shape yyyy-mm-ddTHH:mmZ, representing the start datetime. 
+#' @param to A string with shape yyyy-mm-ddTHH:mmZ, representing the end datetime. The end date time can be max. 1 month after \code{from} date. 
+#' @return  A data frame with two columns, fuel and percentage. Which represents the percentage of the fuels used to generate electricity in the specified datetime.  
+#' @examples
+#' check_fuel_region_time()
+#' check_fuel_region_time("london", from = "2018-11-16T06:00Z", to = "2018-12-15T06:00Z")
+#' @export check_fuel_region_time
 
 check_fuel_region_time <- function(region = "Scotland", from = "now", to = "tomorrow"){
   stopifnot(is.character(region) || is.numeric(region), is.character(from), is.character(to))
@@ -96,7 +107,16 @@ check_fuel_region_time <- function(region = "Scotland", from = "now", to = "tomo
   return(energy_fuel)
   }
 
-pie_API_2 <- function(region, ...){
+#' @title Pie plot, the electricity sources used between specified datetimes for a specified region.
+#' @param region A number (regionid) or a string (region short name). If nothing specified, the default is "Scotland". See \code{regions()} to know the admitted values.
+#' @param from A string with shape yyyy-mm-ddTHH:mmZ, representing the start datetime. 
+#' @param to A string with shape yyyy-mm-ddTHH:mmZ, representing the end datetime. The end date time can be max. 1 month after \code{from} date. 
+#' @return  A pie chart showing different fuel sources and percentages. Represents the percentage of the fuels used to generate electricity in the specified datetime.  
+#' @examples
+#' pie_API_2("london", from = "2018-11-16T06:00Z", to = "2018-12-15T06:00Z")
+#' @export pie_API_2
+
+pie_API_2 <- function(region, from, to){
   df <- check_fuel_region_time(region, ...)
   ggplot2::ggplot(data = df , ggplot2::aes(x ="" , y = perc , fill = fuel))+
     ggplot2::geom_bar(stat = "identity", color = "white")+ 
@@ -104,5 +124,4 @@ pie_API_2 <- function(region, ...){
     ggplot2::geom_text(ggplot2::aes(label = perc), position = ggplot2::position_stack(vjust = 0.55), size = 4 , check_overlap = TRUE)+
     ggplot2::scale_fill_brewer(palette="Set1")+
     ggplot2::theme_void()
-  
 }
