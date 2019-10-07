@@ -3,6 +3,8 @@ library("jsonlite")
 library("dplyr")
 library("ggplot2")
 library("lubridate")
+library("proto")
+library("scales")
 
 regions <- function(){ 
   url <- "https://api.carbonintensity.org.uk/regional/"
@@ -48,3 +50,4 @@ pie_API <- function(region){
     ggplot2::theme_void()
   
 }
+
