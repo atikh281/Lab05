@@ -9,4 +9,6 @@ Authors@R: c(person("Jose", "Mendez", role = c("aut", "cre"), email = "josme478@
 Description: Answer for Lab05
 License: GPL-2
 Encoding: UTF-8
-
+Suggests: 
+    testthat
+RoxygenNote: 6.1.1
