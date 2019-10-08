@@ -119,7 +119,7 @@ check_fuel_region_time <- function(region = "Scotland", from = "now", to = "tomo
   colnames(energydf) <- namesvector
   energy_fuel_day <- as.data.frame(energydf)
   #Get Fuels
-  energy_fuel <- data.frame(fuel = namesvector, perc = unname(colSums(energydf)/sum(energydf)*100))
+  energy_fuel <- data.frame(fuel = namesvector, perc = unname(colSums(energydf)/sum(energydf)*100), stringsAsFactors = FALSE)
   return(energy_fuel)
   }
 
@@ -134,8 +134,7 @@ pie_API <- function(region){
   
 }
 
-<<<<<<< HEAD
-=======
+
 pie_API_2 <- function(region, ...){
   df <- check_fuel_region_time(region, ...)
   ggplot2::ggplot(data = df , ggplot2::aes(x ="" , y = perc , fill = fuel))+
@@ -146,4 +145,19 @@ pie_API_2 <- function(region, ...){
     ggplot2::theme_void()
   
 }
->>>>>>> e55ec19109a3534254d286fdc00522c0c1c3cfe8
+
+test_that("Check that column 1 is Numeric", {
+  expect_equal(is.numeric(regions()$regionid), TRUE)
+})
+test_that("Check that column 2 is character", {
+  expect_equal(is.character(regions()$shortname), TRUE)
+})
+
+test_that("Check that sum of perc is 100", {
+  expect_equal(sum(check_fuel_region_time()$perc), 100)
+})
+
+test_that("Check the different kinds of fuel", {
+  expect_equal(check_fuel_region_time()$fuel,"biomass") 
+               })
+ 
