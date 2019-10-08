@@ -1,0 +1,67 @@
+---
+title: "Team05Lab05"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Team05Lab05}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Team05Lab05)
+```
+
+# Lab05: A package connecting to a web API
+
+For this lab, we created a package which connects to the carbon intensity API. You can follow this link to the [Carbon Intensity UK API](https://carbonintensity.org.uk/)  
+
+## Getting to know the regions.  
+The API connects to data from 17 different regions. You can see the regions [here](https://carbon-intensity.github.io/api-definitions/?python#region-list) or calling the regions() function.    
+```{r, eval=TRUE}
+    regions()  
+```  
+
+## Get the electricity sources used between specified datetimes for a specified region.  
+The check_fuel_region_time function returns a dataframe with the fuels used in an interval of time. When calling the function, you have to add the following parameters.  
+
++ **region** A number (regionid) or a string (region short name). If nothing specified, the default is "Scotland". Call regions() to know the admitted values.   
++ **from** A string with shape yyyy-mm-ddTHH:mmZ, representing the start datetime.  
++ **to** A string with shape yyyy-mm-ddTHH:mmZ, representing the end datetime. The end date time can be max 1 month after **from** date
+
+## Example
+Using the following command  
+```{r, eval=FALSE}
+check_fuel_region_time("Scotland", "2018-11-16T09:00Z", "2018-12-10T16:00Z")
+```  
+we will get a data frame containing the fuels used between the time interval [from, to] in the specified region.  
+
+```{r, eval=TRUE, echo = FALSE}
+check_fuel_region_time("Scotland", "2018-11-16T09:00Z", "2018-12-10T16:00Z")
+```  
+
+## Plotting the electricity sources used between specified datetimes for a specified region.  
+The pie_API_2 function returns a plot of the fuels used in an interval of time. When calling the function, you have to add the following parameters.  
+
++ **region** A number (regionid) or a string (region short name). If nothing specified, the default is "Scotland". Call regions() to know the admitted values.   
++ **from** A string with shape yyyy-mm-ddTHH:mmZ, representing the start datetime.  
++ **to** A string with shape yyyy-mm-ddTHH:mmZ, representing the end datetime. The end date time can be max 1 month after **from** date
+
+## Example
+Using the following command  
+
+```{r, eval=FALSE}
+pie_API_2("Scotland", "2018-11-16T09:00Z", "2018-12-10T16:00Z")
+```  
+  
+we will get a plot of the fuels used between the time interval [from, to] in the specified region.  
+
+```{r, eval=TRUE, echo = FALSE}
+pie_API_2("Scotland", "2018-11-16T09:00Z", "2018-12-10T16:00Z")
+```  

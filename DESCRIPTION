@@ -10,5 +10,8 @@ Description: Answer for Lab05
 License: GPL-2
 Encoding: UTF-8
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

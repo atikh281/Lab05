@@ -124,7 +124,7 @@ pie_API_2 <- function(region, from, to){
   ggplot2::ggplot(data = df , ggplot2::aes(x ="" , y = perc , fill = fuel))+
     ggplot2::geom_bar(stat = "identity", color = "white")+ 
     ggplot2::coord_polar(theta = "y", start = 0)+
-    ggplot2::geom_text(ggplot2::aes(label = perc), position = ggplot2::position_stack(vjust = 0.55), size = 4 , check_overlap = TRUE)+
+    ggplot2::geom_text(ggplot2::aes(label = perc), position = ggplot2::position_stack(vjust = 0.55), size = 4 , check_overlap = TRUE) +
     ggplot2::scale_fill_brewer(palette="Set1")+
     ggplot2::theme_void()
 }
