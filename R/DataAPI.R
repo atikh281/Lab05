@@ -3,7 +3,6 @@ library("jsonlite")
 library("dplyr")
 library("ggplot2")
 library("lubridate")
-library("testthat")
 
 #' @title A function to know the regions admitted by check_fuel_region_time().
 #' @return  A data frame with two columns, regionid and shortname. 
